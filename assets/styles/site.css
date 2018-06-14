@@ -35,3 +35,17 @@ html, body {
     background-color:cadetblue; 
     padding: .5em;
     }
+
+    .ui-menu .ui-menu-item {
+      margin:10px;
+      padding: 0;
+      zoom: 1;
+      float: left;
+      
+      clear: none;
+      width: auto;
+      }
+      
+      #nav li { width: auto; clear: none; }
+      
+      .ui-menu .ui-menu-item a {padding: 2px .2em;}
