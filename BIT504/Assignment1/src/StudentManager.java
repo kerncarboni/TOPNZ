@@ -26,7 +26,6 @@ public class StudentManager
 	private static int selectMenuOption()
 		{
 		Scanner scanner = new Scanner(System.in);
-		int menuOption = scanner.nextInt();
-		return menuOption;
+		return scanner.nextInt();
 		}
 	}
