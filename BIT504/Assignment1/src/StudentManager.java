@@ -4,6 +4,7 @@ public class StudentManager
 	{
 	public static void main(String[] args)
 		{
+		displayMenu();
 		while (selectMenuOption() != 5)
 			{
 			displayMenu();
@@ -19,8 +20,7 @@ public class StudentManager
 		System.out.println("3) Add new Student");
 		System.out.println("4) Remove Student");
 		System.out.println("5) Exit");
-
-
+		System.out.println("Please enter a number ");
 		}
 
 	private static int selectMenuOption()
