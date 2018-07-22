@@ -10,18 +10,16 @@ public class StudentManager
 
 	public static void main(String[] args)
 		{
-		if (readFile("students.txt")) {
+		if (readFile("students.txt"))
+			{
 			displayMenu();
-			switch (selectMenuOption()) {
-				case 1: {
-					displayReportByMarks();
+			switch (selectMenuOption())
+				{
+				case 1: {displayReportByMarks();}
+				case 2: {displayReportByGrades();}
+				case 5: {System.exit(0);}
 				}
-				case 5: {
-					System.exit(0);
-				}
-
 			}
-		}
 		}
 
 	private static void displayMenu()
@@ -104,4 +102,25 @@ public class StudentManager
 			));
 		}
 		}
+
+	private static void displayReportByGrades()
+		{
+		System.out.println("Name           Course    A1  A2  A3");
+		for (Student student : students)
+			{
+			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s",
+					student.getFullName(),
+					student.getMathsMarks().getCourseName(),
+					student.getMathsMarks().getGrade(1),
+					student.getMathsMarks().getGrade(2),
+					student.getMathsMarks().getGrade(3)));
+			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s",
+					student.getFullName(),
+					student.getEnglishMarks().getCourseName(),
+					student.getEnglishMarks().getGrade(1),
+					student.getEnglishMarks().getGrade(2),
+					student.getEnglishMarks().getGrade(3)
+
+			));
+		}}
 	}
