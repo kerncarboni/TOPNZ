@@ -10,14 +10,18 @@ public class StudentManager
 
 	public static void main(String[] args)
 		{
-		if(readFile("students.txt"))
-			{
+		if (readFile("students.txt")) {
 			displayMenu();
-			while (selectMenuOption() != 5)
-				{
-				displayMenu();
+			switch (selectMenuOption()) {
+				case 1: {
+					displayReportByMarks();
 				}
+				case 5: {
+					System.exit(0);
+				}
+
 			}
+		}
 		}
 
 	private static void displayMenu()
@@ -40,36 +44,32 @@ public class StudentManager
 
 	public static boolean readFile(String filename)
 		{
-		try
-			{
+		try {
 			Scanner scanner = new Scanner(new File(filename));
-			while (scanner.hasNextLine())
-				{
-					String[] words = scanner.nextLine().split(",");
-					int id = Integer.parseInt(words[0]);
-					String firstName = words[1];
-					String lastName = words[2];
-					int mathMark1 = Integer.parseInt(words[3]);
-					int mathMark2 = Integer.parseInt(words[4]);
-					int mathMark3 = Integer.parseInt(words[5]);
-					int englishMark1 = Integer.parseInt(words[6]);
-					int englishMark2 = Integer.parseInt(words[7]);
-					int englishMark3 = Integer.parseInt(words[8]);
-					addStudent(id, firstName, lastName, mathMark1, mathMark2, mathMark3, englishMark1, englishMark2, englishMark3);
-
-				}
-				}
-		catch (FileNotFoundException e)
-			{
-			System.out.println("Failed to read file");
+			while (scanner.hasNextLine()) {
+				String[] words = scanner.nextLine().split(",");
+				int id = Integer.parseInt(words[0]);
+				String firstName = words[1];
+				String lastName = words[2];
+				int mathMark1 = Integer.parseInt(words[3]);
+				int mathMark2 = Integer.parseInt(words[4]);
+				int mathMark3 = Integer.parseInt(words[5]);
+				int englishMark1 = Integer.parseInt(words[6]);
+				int englishMark2 = Integer.parseInt(words[7]);
+				int englishMark3 = Integer.parseInt(words[8]);
+				addStudent(id, firstName, lastName, mathMark1, mathMark2, mathMark3, englishMark1, englishMark2, englishMark3);
 			}
-			return true;
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Failed to read file");
+		}
+		return true;
 		}
 
-	private static void addStudent(int id, String firstName, String lastName, int	mathsMark1, int mathsMark2, int mathsMark3, int englishMark1, int englishMark2,
+	private static void addStudent(int id, String firstName, String lastName, int mathsMark1, int mathsMark2, int mathsMark3, int englishMark1, int englishMark2,
 											 int englishMark3)
 		{
-		students.add(new Student(id, firstName, lastName, mathsMark1, mathsMark2, mathsMark3, englishMark1, englishMark2, englishMark3 ));
+		students.add(new Student(id, firstName, lastName, mathsMark1, mathsMark2, mathsMark3, englishMark1, englishMark2, englishMark3));
 		}
 
 	private static void addNewStudent()
@@ -84,9 +84,24 @@ public class StudentManager
 
 	private static void displayReportByMarks()
 		{
-		for (Student student: students)
-			{
+		System.out.println("Name           Course    A1  A2  A3");
+		for (Student student : students) {
+			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d",
+					student.getFullName(),
+					student.getMathsMarks().getCourseName(),
+					student.getMathsMarks().getMark(1),
+					student.getMathsMarks().getMark(2),
+					student.getMathsMarks().getMark(3)
 
-			}
+			));
+			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d",
+					student.getFullName(),
+					student.getEnglishMarks().getCourseName(),
+					student.getEnglishMarks().getMark(1),
+					student.getEnglishMarks().getMark(2),
+					student.getEnglishMarks().getMark(3)
+
+			));
+		}
 		}
 	}
