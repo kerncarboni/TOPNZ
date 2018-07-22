@@ -15,9 +15,21 @@ public class StudentManager
 			displayMenu();
 			switch (selectMenuOption())
 				{
-				case 1: {displayReportByMarks();}
-				case 2: {displayReportByGrades();}
-				case 5: {System.exit(0);}
+				case 1:
+					{
+					displayReportByMarks();
+					break;
+					}
+				case 2:
+					{
+					displayReportByGrades();
+					break;
+					}
+				case 5:
+					{
+					System.exit(0);
+					break;
+					}
 				}
 			}
 		}
