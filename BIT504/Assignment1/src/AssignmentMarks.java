@@ -55,12 +55,17 @@ public class AssignmentMarks
 
 	public int getAverageMark()
 		{
-		return mark1 + mark2 + mark3 / 3;
+		return (mark1 + mark2 + mark3) / 3;
+		}
+
+	public String getAverageGrade()
+		{
+		return markToGrade(getAverageMark());
 		}
 
 	private String markToGrade(int mark)
 		{
-		String grade = null;
+		String grade;
 		if(mark <= 100 && mark >= 95)
 			{
 			grade = "A+";

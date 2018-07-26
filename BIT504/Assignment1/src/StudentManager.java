@@ -25,6 +25,11 @@ public class StudentManager
 					displayReportByGrades();
 					break;
 					}
+				case 4:
+					{
+					removeStudent(1);
+					break;
+					}
 				case 5:
 					{
 					System.exit(0);
@@ -87,29 +92,34 @@ public class StudentManager
 
 		}
 
-	private static void removeStudent()
+	private static void removeStudent(int id)
 		{
-
+		if(id <= students.size())
+			students.remove(id);
 		}
 
 	private static void displayReportByMarks()
 		{
-		System.out.println("Name           Course    A1  A2  A3");
+		System.out.println("Name           Course    A1  A2  A3  Grade");
+		System.out.println("------------------------------------------");
 		for (Student student : students) {
-			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d",
+			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d%-4d",
 					student.getFullName(),
 					student.getMathsMarks().getCourseName(),
 					student.getMathsMarks().getMark(1),
 					student.getMathsMarks().getMark(2),
-					student.getMathsMarks().getMark(3)
+					student.getMathsMarks().getMark(3),
+					student.getMathsMarks().getAverageMark()
+
 
 			));
-			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d",
-					student.getFullName(),
+			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d%-4d",
+					"",
 					student.getEnglishMarks().getCourseName(),
 					student.getEnglishMarks().getMark(1),
 					student.getEnglishMarks().getMark(2),
-					student.getEnglishMarks().getMark(3)
+					student.getEnglishMarks().getMark(3),
+					student.getMathsMarks().getAverageMark()
 
 			));
 		}
@@ -117,21 +127,26 @@ public class StudentManager
 
 	private static void displayReportByGrades()
 		{
-		System.out.println("Name           Course    A1  A2  A3");
+		System.out.println("Name           Course    A1  A2  A3  Grade");
+		System.out.println("------------------------------------------");
 		for (Student student : students)
 			{
-			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s",
+			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s%-4s",
 					student.getFullName(),
 					student.getMathsMarks().getCourseName(),
 					student.getMathsMarks().getGrade(1),
 					student.getMathsMarks().getGrade(2),
-					student.getMathsMarks().getGrade(3)));
+					student.getMathsMarks().getGrade(3),
+					student.getEnglishMarks().getAverageGrade()
+					));
 			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s",
 					student.getFullName(),
-					student.getEnglishMarks().getCourseName(),
+					"",
 					student.getEnglishMarks().getGrade(1),
 					student.getEnglishMarks().getGrade(2),
-					student.getEnglishMarks().getGrade(3)
+					student.getEnglishMarks().getGrade(3),
+					student.getEnglishMarks().getAverageGrade()
+
 
 			));
 		}}
