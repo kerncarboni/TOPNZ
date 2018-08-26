@@ -10,32 +10,43 @@ public class StudentManager
 
 	public static void main(String[] args)
 		{
+		int menuOption;
 		if (readFile("students.txt"))
 			{
-			displayMenu();
-			switch (selectMenuOption())
+			do
 				{
-				case 1:
+				displayMenu();
+				menuOption = selectMenuOption();
+				switch (menuOption)
 					{
-					displayReportByMarks();
-					break;
-					}
-				case 2:
-					{
-					displayReportByGrades();
-					break;
-					}
-				case 4:
-					{
-					removeStudent(1);
-					break;
-					}
-				case 5:
-					{
-					System.exit(0);
-					break;
+					case 1:
+						{
+						displayReportByMarks();
+						break;
+						}
+					case 2:
+						{
+						displayReportByGrades();
+						break;
+						}
+					case 3:
+						{
+						addNewStudent();
+						break;
+						}
+					case 4:
+						{
+						removeStudent(1);
+						break;
+						}
+					case 5:
+						{
+						System.exit(0);
+						break;
+						}
 					}
 				}
+			while (menuOption != 5);
 			}
 		}
 
@@ -54,14 +65,25 @@ public class StudentManager
 	private static int selectMenuOption()
 		{
 		Scanner scanner = new Scanner(System.in);
-		return scanner.nextInt();
+		int option;
+
+		do
+			{
+			System.out.println("Select an option between 1 and 5: ");
+			option = scanner.nextInt();
+			}
+		while(option < 1 || option > 5);
+
+		return option;
 		}
 
 	public static boolean readFile(String filename)
 		{
-		try {
+		try
+			{
 			Scanner scanner = new Scanner(new File(filename));
-			while (scanner.hasNextLine()) {
+			while (scanner.hasNextLine())
+				{
 				String[] words = scanner.nextLine().split(",");
 				int id = Integer.parseInt(words[0]);
 				String firstName = words[1];
@@ -73,11 +95,12 @@ public class StudentManager
 				int englishMark2 = Integer.parseInt(words[7]);
 				int englishMark3 = Integer.parseInt(words[8]);
 				addStudent(id, firstName, lastName, mathMark1, mathMark2, mathMark3, englishMark1, englishMark2, englishMark3);
+				}
 			}
-		}
-		catch (FileNotFoundException e) {
+		catch (FileNotFoundException e)
+			{
 			System.out.println("Failed to read file");
-		}
+			}
 		return true;
 		}
 
@@ -89,7 +112,28 @@ public class StudentManager
 
 	private static void addNewStudent()
 		{
-
+		Scanner scanner = new Scanner(System.in);
+		int id, mathsMark1, mathsMark2, mathsMark3, englishMark1, englishMark2, englishMark3;
+		String firstName, lastName;
+		System.out.println("Please enter the students id: ");
+		id = scanner.nextInt();
+		System.out.println("Please enter the students first name: ");
+		firstName = scanner.next();
+		System.out.println("Please enter the students last name: ");
+		lastName = scanner.next();
+		System.out.println("Please enter the students Maths Mark 1: ");
+		mathsMark1 = scanner.nextInt();
+		System.out.println("Please enter the students Maths Mark 2: ");
+		mathsMark2 = scanner.nextInt();
+		System.out.println("Please enter the students Maths Mark 3: ");
+		mathsMark3 = scanner.nextInt();
+		System.out.println("Please enter the students English Mark 1: ");
+		englishMark1 = scanner.nextInt();
+		System.out.println("Please enter the students English Mark 2: ");
+		englishMark2 = scanner.nextInt();
+		System.out.println("Please enter the students English Mark 3: ");
+		englishMark3 = scanner.nextInt();
+		addStudent(id, firstName, lastName, mathsMark1,mathsMark2,mathsMark3, englishMark1, englishMark2, englishMark3);
 		}
 
 	private static void removeStudent(int id)
@@ -102,7 +146,8 @@ public class StudentManager
 		{
 		System.out.println("Name           Course    A1  A2  A3  Grade");
 		System.out.println("------------------------------------------");
-		for (Student student : students) {
+		for (Student student : students)
+			{
 			System.out.println(String.format("%-15s%-10s%-4d%-4d%-4d%-4d",
 					student.getFullName(),
 					student.getMathsMarks().getCourseName(),
@@ -122,7 +167,7 @@ public class StudentManager
 					student.getMathsMarks().getAverageMark()
 
 			));
-		}
+			}
 		}
 
 	private static void displayReportByGrades()
@@ -139,15 +184,13 @@ public class StudentManager
 					student.getMathsMarks().getGrade(3),
 					student.getEnglishMarks().getAverageGrade()
 					));
-			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s",
-					student.getFullName(),
+			System.out.println(String.format("%-15s%-10s%-4s%-4s%-4s%-4s",
 					"",
+					student.getEnglishMarks().getCourseName(),
 					student.getEnglishMarks().getGrade(1),
 					student.getEnglishMarks().getGrade(2),
 					student.getEnglishMarks().getGrade(3),
 					student.getEnglishMarks().getAverageGrade()
-
-
 			));
 		}}
 	}
